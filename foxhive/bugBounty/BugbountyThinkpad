@@ -1,0 +1,34 @@
+#Set the target
+
+# subdomain discovery 
+subfinder -d domain.com  -all -silent > subdomains.txt
+
+amass enum -d domain.com -o amass_output.txt
+
+
+# Fetch uerls from various soruce 
+cat subdomains.txt | waybackurls > waybackurls.txt
+
+# port scanning 
+massscan -iL subdoamins.txt -p1-65535 --reate 10000  oX ports.xml
+nmap -sS -sV -p- -iL subdomains.txt -oN nmap_output.txt
+
+
+# Github Recon
+github-search -t github_token -d domain.com -o github_recon.txt
+python3 GitDorker.py -tf Github_token -q domain.com -d dorks.txt  -o results.txt
+
+# cors misconfiguration 
+python3 corsy.py -i urls.txt
+python3 CORStest.pyt -v urls.txt
+
+# Arjun for hidden endpoints
+arjun -u https://target.com  -oT arjun_output.com
+
+#xss and SSTI testing
+xsser -u https://target.com
+tplmap -u https://target.com
+
+# Directory brute forece and parameter discovery 
+ffuf -w /path/to/wordlist -u https://target.com/Fuzz -o ffuf_output.txt
+ffuf -u https://target.com/page.php?FUZZ=test  -w /path/to/params.txt -o ffuf_params.txt

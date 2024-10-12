@@ -1,0 +1,54 @@
+# frist find subdomain 
+
+crt.sh --website --> 
+
+# now check technology 
+
+search.censys.io --> website 
+
+# subdomain find using tools 
+
+subfinder :
+subfinder -d netflix.com -all > subdomain.txt
+
+assetfinder :
+sudo assetfinder -subs-only netflix.com > sub.txt
+
+# marge subdomain in a singale file  using sort
+
+sort -u  subdomain1.txt subdomain2.txt > mainsudbo.txt
+
+# now find live subdomain using httx
+ 
+ cat mainsubdomain.txt | sudo httpx > alive_subdomain.txt
+ 
+ # check subdomain takeover vulnerability has or not using " subzy"
+ 
+ subzy :
+ subzy run --targets mainssubdomain.txt
+ 
+  # after httpx output  thne check status code of the subdomains 
+  
+  cat  alive_subdomain.txt | httpx -sc > alive_domain_staus.code.txt
+  
+  # get only 200,301,302  status  domain 
+  
+  cat alive_domain_statuscode.txt |grep "200" > 200url.txt
+  
+  # check  url using kartana [ https://github.com/projectdiscovery/katana ] 
+  
+  kartana:
+  sudo katana -u https://brand.netflix.com -jc -o allurls.txt
+  
+ # arpor url gola ty grep kore dekha jaity pary grep *=*  , oitay xss try kora jaity pary 
+ 
+  
+  
+  
+  
+ 
+ 
+ 
+ 
+ 
+ 

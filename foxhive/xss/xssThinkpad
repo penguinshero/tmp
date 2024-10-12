@@ -1,0 +1,8 @@
+# pathway of exploit web application for xss 
+
+step1: Use function as a normal user 
+
+step2: After understand the function  try to bypass or exit out that tag 
+
+step3: If can not exit out the tag , then try to use event handler like , onmouseover , onerror 
+
